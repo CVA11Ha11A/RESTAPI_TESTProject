@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MusicLyricsSerchCanvas : MonoBehaviour
 {
     private Vector3 originPos = default;
+
 
     private void Awake()
     {

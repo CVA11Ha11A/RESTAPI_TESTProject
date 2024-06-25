@@ -45,3 +45,6 @@ TagManager:
   - name: MainCanvas
     uniqueID: 3192150079
     locked: 0
+  - name: GlobalFrontUI
+    uniqueID: 2363883807
+    locked: 0

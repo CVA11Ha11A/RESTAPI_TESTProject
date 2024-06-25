@@ -20,21 +20,21 @@ public class CanvasRootManager : MonoBehaviour
     }
 
     public MusicLyricsSerchCanvas musicLyricsRoot = null;
+    public GlobalFrontCanvas frontCanvas = null;
 
     private void Awake()
     {
         if(instance == null)
         {
+            //DE.Log($"RootManager 인스턴스 지정");
             instance = this;
         }
         else
         {
-            Destroy(instance);
+            //DE.Log($"RootManager 이미존재 자신 파괴");
+            Destroy(gameObject);
         }
     }
-    void Start()
-    {
-        
-    }
+
     
-}
+}       // ClassEnd

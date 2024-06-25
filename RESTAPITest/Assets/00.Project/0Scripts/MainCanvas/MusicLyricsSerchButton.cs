@@ -13,6 +13,7 @@ public class MusicLyricsSerchButton : FeatureButton
 
     public override void OnClickButton()
     {
+        //DE.Log($"{CanvasRootManager.Instance.musicLyricsRoot == null} ");
         CanvasRootManager.Instance.musicLyricsRoot.OnMusicLyricsSerchCanvas();
     }
 
