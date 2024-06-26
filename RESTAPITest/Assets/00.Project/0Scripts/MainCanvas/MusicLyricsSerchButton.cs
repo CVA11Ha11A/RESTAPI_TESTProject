@@ -6,11 +6,6 @@ using UnityEngine.UI;
 public class MusicLyricsSerchButton : FeatureButton
 {
 
-    private void Start()
-    {
-
-    }
-
     public override void OnClickButton()
     {
         //DE.Log($"{CanvasRootManager.Instance.musicLyricsRoot == null} ");

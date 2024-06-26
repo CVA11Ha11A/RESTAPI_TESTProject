@@ -68,36 +68,9 @@ public class Test001 : MonoBehaviour
     {
         if (isTest2 == false) { return; }
 
-        List<string> filePaths = new List<string>();
-        string[] drives = Environment.GetLogicalDrives();
+        List<string> filePaths = new List<string>();        
 
-        foreach (string drive in drives)
-        {
-            if (Directory.Exists(drive))
-            {
-                try
-                {
-                    DE.Log($"현재 : {drive}");
-                    filePaths.AddRange(Directory.GetFiles(drive, "*.mp3", SearchOption.AllDirectories));
-                }
-                catch (UnauthorizedAccessException e)
-                {
-                    DE.Log($"Access denied to {drive}: {e.Message}");
-                    continue; // 권한이 없는 디렉토리를 건너뜁니다.
-                }
-                catch (Exception e)
-                {
-                    DE.Log($"Error accessing {drive}: {e.Message}");
-                    continue; // 오류가 발생한 디렉토리를 건너뜁니다.
-                }
-            }
-        }
 
-        // 파일 경로를 출력합니다.
-        foreach (string filePath in filePaths)
-        {
-            DE.Log(filePath);
-        }
     }
 
 
