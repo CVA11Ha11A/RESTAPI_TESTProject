@@ -9,7 +9,7 @@ public class MusicSearch : MonoBehaviour
 {
     private List<string> musicExtension = null;     // 찾을 확장자
     private List<string> findDirectory = null;      // 찾을 폴더목록
-    private List<string> searchFileList = null;      // 찾은 파일경로
+    private List<string> searchFileList = null;      // 찾은 파일경로 ! 찾고 이벤트 실행이후 목록을 생성한후 Clear되는 객체
     public List<string> SerchFileList
     {
         get
@@ -88,9 +88,6 @@ public class MusicSearch : MonoBehaviour
 
         }       // foreach
 
-        this.transform.GetComponent<MusicLyricsSerchCanvas>().InvokeMusicFindEndEvent(searchFileList);
-
-
 #if UNITY_EDITOR
         DE.Log($"찾은 음악파일 출력\n현재 찾은것 갯수 : {SerchFileList.Count}");
         foreach (string directory in SerchFileList)
@@ -99,7 +96,8 @@ public class MusicSearch : MonoBehaviour
         }
 #endif 
 
-        // 여기서 
+        this.transform.GetComponent<MusicLyricsSerchCanvas>().InvokeMusicFindEndEvent(searchFileList);
+        
     }       // CSerchStart()
 
 

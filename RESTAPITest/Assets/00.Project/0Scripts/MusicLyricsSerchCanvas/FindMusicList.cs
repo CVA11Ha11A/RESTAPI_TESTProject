@@ -25,9 +25,9 @@ public class FindMusicList : MonoBehaviour
         for (int i = 0; i < findList_.Count; i++)
         {
             GameObject obj = Instantiate(objPrefab, parentTrs);
-            obj.AddComponent<FindMusicData>();
+            obj.AddComponent<FindMusicData>().FirstSetter(findList_[i], Path.GetFileName(findList_[i]));
 
         }
-    
+        findList_.Clear();      // 이후 사용할 경우가 존재하지 않음
     }
 }       // ClassEnd

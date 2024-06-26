@@ -5,12 +5,19 @@ using System.IO;
 using System;
 using System.Diagnostics;
 using UnityEngine.Rendering;
+using TagLib;
+using TagLib.Id3v2;
+using File = TagLib.File;
+using TMPro;
+//using Tag = TagLib.Id3v2.Tag;
 
 public class Test001 : MonoBehaviour
 {
     [SerializeField] private bool isInputTest;
     [SerializeField] private bool isTest1;
     [SerializeField] private bool isTest2;
+    
+    Vector3 originPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,51 +34,24 @@ public class Test001 : MonoBehaviour
     private void Test0001()
     {
         if (isTest1 == false) { return; }
+        File file = File.Create("E:\\zChrome Down\\Crush (크러쉬) - 나빠 (NAPPA).mp3");
+        TagLib.Tag musicMetaData = file.Tag;
+        musicMetaData.Lyrics = "적용되나?";
+        DE.Log($"Album : {musicMetaData.Album}\n Disc : {musicMetaData.Disc}" +
+            $"\n Title : {musicMetaData.Title}\n AlbumArtists : {musicMetaData.AlbumArtists}");
+        file.Save();
+        file.Dispose();
 
-
-        Stopwatch sw = new Stopwatch();
-        sw.Start();
-
-        List<string> filePaths = new List<string>();
-        string[] drives = Environment.GetLogicalDrives();
-
-        foreach (string drive in drives)
-        {
-            if (Directory.Exists(drive))
-            {
-                try
-                {
-                    GetFilesRecursive(drive, "*.mp3", filePaths);
-                }
-                catch (UnauthorizedAccessException e)
-                {
-                    DE.Log($"Access denied to {drive}: {e.Message}");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Error accessing {drive}: {e.Message}");
-                }
-            }
-        }
-        sw.Stop();
-
-        // 파일 경로를 출력합니다.
-        foreach (string filePath in filePaths)
-        {
-            DE.Log(filePath);
-        }
-        DE.Log($"경과시간 : {sw.ElapsedMilliseconds}");
-
+        //musicMetaData.
 
     }       // Test0001
     private void Test0002()
     {
         if (isTest2 == false) { return; }
 
-        List<string> filePaths = new List<string>();        
+        
 
-
-    }
+    }       // Test0002()
 
 
     public void TestInput()
@@ -93,23 +73,5 @@ public class Test001 : MonoBehaviour
     }
 
 
-    static void GetFilesRecursive(string path, string searchPattern, List<string> filePaths)
-    {
-        try
-        {
-            filePaths.AddRange(Directory.GetFiles(path, searchPattern));
-            foreach (string directory in Directory.GetDirectories(path))
-            {
-                GetFilesRecursive(directory, searchPattern, filePaths);
-            }
-        }
-        catch (UnauthorizedAccessException e)
-        {
-            DE.Log($"Access denied to {path}: {e.Message}");
-        }
-        catch (Exception e)
-        {
-            DE.Log($"Error accessing {path}: {e.Message}");
-        }
-    }
+
 }       // ClassEnd
