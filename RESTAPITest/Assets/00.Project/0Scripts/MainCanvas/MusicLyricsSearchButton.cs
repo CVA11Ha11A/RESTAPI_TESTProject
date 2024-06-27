@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MusicLyricsSerchButton : FeatureButton
+public class MusicLyricsSearchButton : FeatureButton
 {
 
     public override void OnClickButton()

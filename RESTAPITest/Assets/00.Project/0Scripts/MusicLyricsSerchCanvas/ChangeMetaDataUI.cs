@@ -7,14 +7,17 @@ using TagLib;
 using System.IO;
 using System.Text;
 
+// OutPut예외에 사용될것임 On 상태에서 새로운 메타데이터를 호출할수 있는 경우를 방지하기 위함 2024.06.27
+// UI들의 State를 설정함 UI의 움직임을 설정할때 State가 어떤것인지 보내주고 해당 State에 따라서 이동될 위치가 변경됨 2024.06.28
+public enum UIState        
+{
+    On = 10000,
+    Off = 20000
+}
 
 public class ChangeMetaDataUI : MonoBehaviour
 {
-    private enum UIState        // OutPut예외에 사용될것임 On 상태에서 새로운 메타데이터를 호출할수 있는 경우를 방지하기 위함
-    {   
-        On = 10000,
-        Off = 20000
-    }
+
 
 
     private TMP_InputField musicName = null;
@@ -69,6 +72,11 @@ public class ChangeMetaDataUI : MonoBehaviour
     private void CloseUI()
     {
         // TODO : 화면 원위치, 수정된 정보 저장
+    }
+
+    public (string,string) GetMusicDatas()
+    {
+        return (this.musicName.text, this.artistName.text);
     }
 
 
