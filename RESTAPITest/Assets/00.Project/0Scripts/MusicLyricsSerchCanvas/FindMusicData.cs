@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TagLib;
 using TMPro;
+using UnityEngine.UI;
 
 public class FindMusicData : MonoBehaviour
 {
@@ -12,18 +13,22 @@ public class FindMusicData : MonoBehaviour
 
     private void Start()
     {
-
+        Button button = this.transform.GetComponent<Button>();
+        button.onClick.AddListener(MusicObjOnClickEvent);
     }
 
-    private void OnEnable()
+    private void MusicObjOnClickEvent()
     {
-         // TODO : 음악 선택이후 수정할창을 띄워주는 기능 이벤트 구독 (음악 가사 본격적으로 찾는 UI)
+        Transform target = MakingManager.GetTopParentTransform(this.transform);
+        if(target.GetChild(2).GetComponent<ChangeMetaDataUI>())
+        {
+            target.GetChild(2).GetComponent<ChangeMetaDataUI>().OutPutMetaDataUI(this.fileDirectory);
+        }
+        else
+        {
+            DE.LogError($"ChangeMetaDataUI를 찾지 못했음");
+        }
     }
-    private void OnDisable()
-    {
-        
-    }
-
     
 
     public void SetterFileDirectory(string directory_)
@@ -44,7 +49,7 @@ public class FindMusicData : MonoBehaviour
         this.fileDirectory = directory_;
         this.fileName = fileName_;
         TryUpdateFileName();
-        DE.Log($"파일이름 Setter : {this.fileName}\n경로 : {this.fileDirectory}");
+        DE.Log($"파일이름 Setter : {this.fileName}\n경로 : {this.fileDirectory}"); 
     }
 
     private void TryUpdateFileName()
